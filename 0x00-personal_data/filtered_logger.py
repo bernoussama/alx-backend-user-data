@@ -3,9 +3,11 @@
     filtered logger
 """
 
+import os
 import re
 from typing import List
 import logging
+import mysql.connector
 
 patterns = {
     "extract": lambda a, b: r"(?P<field>{})=[^{}]*".format("|".join(a), b),
@@ -51,3 +53,19 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """get db credentials"""
+    host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    database = os.getenv("PERSONAL_DATA_DB_NAME", "")
+    user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    connection = mysql.connector.connect(
+        host=host,
+        port=3306,
+        user=user,
+        password=password,
+        database=database,
+    )
+    return connection
