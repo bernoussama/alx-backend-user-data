@@ -1,0 +1,42 @@
+repos:
+  # Standard hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # - id: check-added-large-files
+      - id: check-case-conflict
+      - id: detect-private-key
+  - repo: https://github.com/hhatto/autopep8
+    rev: v2.3.1 # select the tag or revision you want, or run `pre-commit autoupdate`
+    hooks:
+      - id: autopep8
+  # black
+  - repo: https://github.com/ambv/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        args: # arguments to configure black
+          - --line-length=79
+          - --include='\.pyi?$'
+
+          # these folders wont be formatted by black
+          - --exclude="""\.git |
+            \.__pycache__|
+            \.hg|
+            \.mypy_cache|
+            \.tox|
+            \.venv|
+            _build|
+            buck-out|
+            build|
+            dist"""
+
+        # language_version: python3.7
+  - repo: local
+    hooks:
+      - id: executable-python
+        name: executable python
+        description: Make python scripts executable
+        entry: chmod +x
+        language: system
+        files: \.py$
