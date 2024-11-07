@@ -3,6 +3,6 @@
 import bcrypt
 
 
-def encrypt_password(password: str) -> bytes:
+def hash_password(password: str) -> bytes:
     """Encrypts a password"""
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
