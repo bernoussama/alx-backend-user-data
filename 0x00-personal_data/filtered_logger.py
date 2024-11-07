@@ -7,8 +7,8 @@ import re
 from typing import List
 
 patterns = {
-    "extract": lambda x, y: r"(?P<field>{})=[^{}]*".format("|".join(x), y),
-    "replace": lambda x: r"\g<field>={}".format(x),
+    "eatract": lambda a, b: r"(?P<field>{})=[^{}]*".format("|".join(a), b),
+    "replace": lambda a: r"\g<field>={}".format(a),
 }
 
 
