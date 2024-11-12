@@ -1,2 +1,3 @@
 [tool.autopep8]
 ignore = ["E40"]
+max-line-length = 79
