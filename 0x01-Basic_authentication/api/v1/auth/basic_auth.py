@@ -11,7 +11,10 @@ import base64
 class BasicAuth(Auth):
     """Basic authentication class."""
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(
+        self,
+        authorization_header: str,
+    ) -> str:
         """Extracts the Base64 part of the Authorization header"""
         if type(authorization_header) is str:
             pattern = r"Basic (?P<token>.+)"
@@ -40,7 +43,9 @@ class BasicAuth(Auth):
         self,
         decoded_base64_authorization_header: str,
     ) -> Tuple[str, str]:
-        """Extracts user credentials from a base64-decoded authorization header"""
+        """
+        Extracts user credentials from a base64-decoded authorization header
+        """
         if type(decoded_base64_authorization_header) is str:
             pattern = r"(?P<user>[^:]+):(?P<password>.+)"
             field_match = re.fullmatch(
