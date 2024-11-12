@@ -11,7 +11,9 @@ from api.v1.auth.auth import Auth
 
 auth = None
 auth_type = getenv("AUTH_TYPE", "auth")
-if auth_type == "auth":
+if auth_type == "basic_auth":
+    auth = BasicAuth()
+else:
     auth = Auth()
 
 app = Flask(__name__)
