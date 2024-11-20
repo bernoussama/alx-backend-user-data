@@ -28,6 +28,16 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
+    def find_user_by(self, **kwargs) -> User:
+        """Find a user by arbitrary keyword arguments"""
+        try:
+            user = self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
+            raise NoResultFound("No user found with the given attributes")
+        except InvalidRequestError:
+            raise InvalidRequestError("Invalid query arguments")
+        return user
+
     def add_user(self, email: str, hashed_password: str) -> User:
         """Add a new user to the database"""
         try:
