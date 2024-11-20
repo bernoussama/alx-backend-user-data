@@ -1,0 +1,7 @@
+services:
+  python_app:
+    image: python:3.7
+    stdin_open: true # docker run -i
+    volumes:
+      - .:/app
+    tty: true # docker run -t
